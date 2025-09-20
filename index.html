@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australia Post Address Abbreviations Reference</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d73927;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #d73927;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+        .search-container {
+            margin-bottom: 15px;
+        }
+        .search-box {
+            width: 200px;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f8f9fa;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #d73927;
+            background-color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+        }
+        th {
+            background-color: #d73927;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-right: 1px solid #b91c0c;
+        }
+        th:last-child {
+            border-right: none;
+        }
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #eee;
+        }
+        td:last-child {
+            border-right: none;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:nth-child(even):hover {
+            background-color: #f0f0f0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .table-container {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .table-container h2 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            padding: 0 20px;
+        }
+        .table-container .search-container {
+            padding: 0 20px;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #d73927;
+            background-color: #ffeaa7;
+            border-radius: 4px;
+            margin: 10px 20px;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 25px 30px;
+            }
+            .search-box {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Australia Post Address Abbreviations Reference</h1>
+        
+        <div class="grid">
+            <div class="table-container">
+                <h2>Flat/Unit Type Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search flat/unit types..." onkeyup="filterTable(this, 'flat-unit-table')">
+                </div>
+                <table id="flat-unit-table">
+                    <thead>
+                        <tr>
+                            <th>Flat/Unit Type</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h2>Floor/Level Type Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search floor/level types..." onkeyup="filterTable(this, 'floor-level-table')">
+                </div>
+                <table id="floor-level-table">
+                    <thead>
+                        <tr>
+                            <th>Floor/Level Type</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h2>Street Suffix Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search street suffixes..." onkeyup="filterTable(this, 'street-suffix-table')">
+                </div>
+                <table id="street-suffix-table">
+                    <thead>
+                        <tr>
+                            <th>Street Suffix</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h2>State Type Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search states/territories..." onkeyup="filterTable(this, 'state-table')">
+                </div>
+                <table id="state-table">
+                    <thead>
+                        <tr>
+                            <th>State Type</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h2>Postal Delivery Type Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search postal delivery types..." onkeyup="filterTable(this, 'postal-table')">
+                </div>
+                <table id="postal-table">
+                    <thead>
+                        <tr>
+                            <th>Postal Delivery Type</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container full-width">
+                <h2>Street Type Abbreviations</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search street types..." onkeyup="filterTable(this, 'street-type-table')">
+                </div>
+                <table id="street-type-table">
+                    <thead>
+                        <tr>
+                            <th>Street Type</th>
+                            <th>Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CSV file configurations
+        const csvConfigs = [
+            {
+                file: "1-flat-unit-type-abbrev.csv",
+                tableId: "flat-unit-table",
+                typeColumn: "FlatUnit_Type"
+            },
+            {
+                file: "2-floor-level-type-abbrev.csv",
+                tableId: "floor-level-table",
+                typeColumn: "FloorLevel_Type"
+            },
+            {
+                file: "3-street-type-abbrev.csv",
+                tableId: "street-type-table",
+                typeColumn: "Street_Type"
+            },
+            {
+                file: "4-street-suffix-abbrev.csv",
+                tableId: "street-suffix-table",
+                typeColumn: "Street_Suffix"
+            },
+            {
+                file: "5-state-type-abbrev.csv",
+                tableId: "state-table",
+                typeColumn: "State_Type"
+            },
+            {
+                file: "6-postal-delivery-type-abbrev.csv",
+                tableId: "postal-table",
+                typeColumn: "Postal_Delivery_Type"
+            }
+        ];
+
+        // Simple CSV parser
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',');
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+                data.push(row);
+            }
+            
+            return data;
+        }
+
+        // Populate table with CSV data
+        function populateTable(tableId, data, typeColumn) {
+            const table = document.getElementById(tableId);
+            const tbody = table.getElementsByTagName('tbody')[0];
+            
+            // Clear loading message
+            tbody.innerHTML = '';
+            
+            // Add data rows
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row[typeColumn]}</td>
+                    <td>${row.Abbreviation}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Show error message
+        function showError(tableId, message) {
+            const table = document.getElementById(tableId);
+            const tbody = table.getElementsByTagName('tbody')[0];
+            tbody.innerHTML = `<tr><td colspan="2" class="error">Error: ${message}</td></tr>`;
+        }
+
+        // Load and populate a single CSV file
+        async function loadCSV(config) {
+            try {
+                const response = await fetch(config.file);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${config.file}: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+                populateTable(config.tableId, data, config.typeColumn);
+            } catch (error) {
+                console.error(`Error loading ${config.file}:`, error);
+                showError(config.tableId, `Could not load ${config.file}`);
+            }
+        }
+
+        // Load all CSV files
+        async function loadAllData() {
+            // Load all CSV files in parallel
+            const promises = csvConfigs.map(config => loadCSV(config));
+            await Promise.allSettled(promises);
+        }
+
+        // Filter table rows based on search input
+        function filterTable(input, tableId) {
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById(tableId);
+            const rows = table.getElementsByTagName("tr");
+            
+            // Start from index 1 to skip header row
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let found = false;
+                
+                // Search through all cells in the row
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
+                    if (cellText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (found) {
+                    rows[i].classList.remove("hidden");
+                } else {
+                    rows[i].classList.add("hidden");
+                }
+            }
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+        });
+    </script>
+</body>
+</html>
